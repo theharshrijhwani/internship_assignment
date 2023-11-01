@@ -12,9 +12,20 @@
   border-radius: 2rem;
 }
 
+.heading {
+  background-color: transparent;
+  margin-top: 1rem;
+}
+
 .card-holder h1 {
   background-color: transparent;
   text-align: center;
   padding: 1.3rem;
   font-weight: 700;
+}
+
+.card-section {
+  background-color: transparent;
+  margin-top: 4.5rem;
+  padding: 3rem;
 }
