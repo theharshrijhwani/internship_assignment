@@ -30,13 +30,13 @@ const Dropdown = ({ placeholder, values, func }) => {
                 <li
                   key={idx}
                   onClick={() => {
-                    func(item);
+                    item.custom === null ? func(item.name) : func(item.custom);
                     setShow(false);
                   }}
                 >
-                  {item}
+                  {item.name}
                 </li>
-                <div className="seperator"></div>
+                <div className="seperator" key={idx}></div>
               </>
             ))}
           </ul>

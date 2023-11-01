@@ -13,10 +13,17 @@ import remove from "../../assets/remove.png";
 const ProductWindow = () => {
   const [category, setCategory] = useState(null);
   const [filter, setFilter] = useState(null);
+  const [productData, setProductData] = useState(product_data);
 
   useEffect(() => {
     console.log(category);
   }, [category]);
+
+  useEffect(() => {
+    const sortedData = [productData].sort((a, b) => a.price - b.price);
+    setProductData(sortedData[0]);
+    console.log(sortedData);
+  }, [filter, productData]);
 
   return (
     <div className="pw-container">
@@ -48,7 +55,62 @@ const ProductWindow = () => {
         </div>
         <div className="pw-card-section">
           <div className="pw-card-container">
-            {category === null
+            {filter === null
+              ? category === null
+                ? product_data.map((item, idx) => (
+                    <ProductCard
+                      key={idx}
+                      title={item.name}
+                      price={item.price}
+                      image={item.image}
+                      desc={item.desc}
+                      category={item.category}
+                    />
+                  ))
+                : product_data
+                    .filter((item) => item.category === category)
+                    .map((item, idx) => (
+                      <ProductCard
+                        key={idx}
+                        title={item.name}
+                        price={item.price}
+                        image={item.image}
+                        desc={item.desc}
+                        category={item.category}
+                      />
+                    ))
+              : category === null
+              ? product_data
+                  .sort((a, b) =>
+                    filter === "asc" ? a.price - b.price : b.price - a.price
+                  )
+                  .map((item, idx) => (
+                    <ProductCard
+                      key={idx}
+                      title={item.name}
+                      price={item.price}
+                      image={item.image}
+                      desc={item.desc}
+                      category={item.category}
+                    />
+                  ))
+              : product_data
+                  .sort((a, b) =>
+                    filter === "asc" ? a.price - b.price : b.price - a.price
+                  )
+                  .filter((item) => item.category === category)
+                  .map((item, idx) => (
+                    <ProductCard
+                      key={idx}
+                      title={item.name}
+                      price={item.price}
+                      image={item.image}
+                      desc={item.desc}
+                      category={item.category}
+                    />
+                  ))}
+
+            {/* {category === null
               ? product_data.map((item, idx) => (
                   <ProductCard
                     key={idx}
@@ -70,7 +132,7 @@ const ProductWindow = () => {
                       desc={item.desc}
                       category={item.category}
                     />
-                  ))}
+                  ))} */}
           </div>
         </div>
       </div>
