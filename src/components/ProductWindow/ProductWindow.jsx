@@ -48,16 +48,29 @@ const ProductWindow = () => {
         </div>
         <div className="pw-card-section">
           <div className="pw-card-container">
-            {product_data.map((item, idx) => (
-              <ProductCard
-                key={idx}
-                title={item.name}
-                price={item.price}
-                image={item.image}
-                desc={item.desc}
-                category={item.category}
-              />
-            ))}
+            {category === null
+              ? product_data.map((item, idx) => (
+                  <ProductCard
+                    key={idx}
+                    title={item.name}
+                    price={item.price}
+                    image={item.image}
+                    desc={item.desc}
+                    category={item.category}
+                  />
+                ))
+              : product_data
+                  .filter((item) => item.category === category)
+                  .map((item, idx) => (
+                    <ProductCard
+                      key={idx}
+                      title={item.name}
+                      price={item.price}
+                      image={item.image}
+                      desc={item.desc}
+                      category={item.category}
+                    />
+                  ))}
           </div>
         </div>
       </div>
