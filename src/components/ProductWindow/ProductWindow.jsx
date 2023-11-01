@@ -1,20 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./pwindow.css";
+
 import ProductCard from "../ProductCard/ProductCard";
 
 import { product_data } from "../../data/productdata";
+import { categories } from "../../data/categories";
+import { filters } from "../../data/filters";
+import Dropdown from "../Dropdown/Dropdown";
+import remove from "../../assets/remove.png";
 
 const ProductWindow = () => {
+  const [category, setCategory] = useState(null);
+  const [filter, setFilter] = useState(null);
+
+  useEffect(() => {
+    console.log(category);
+  }, [category]);
+
   return (
-    <div className="container">
-      <div className="card-holder">
-        <div className="heading">
+    <div className="pw-container">
+      <div className="pw-card-holder">
+        <div className="pw-heading">
           <h1>Products Available</h1>
         </div>
-        <div className="options"></div>
-        <div className="card-section">
-          <div className="card-container">
+        <div className="pw-options">
+          <img
+            src={remove}
+            width={20}
+            height={20}
+            style={{
+              backgroundColor: "transparent",
+              filter: "invert(1)",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              setFilter(null);
+              setCategory(null);
+            }}
+          />
+          <Dropdown
+            placeholder="Category"
+            values={categories}
+            func={setCategory}
+          />
+          <Dropdown placeholder="Filters" values={filters} func={setFilter} />
+        </div>
+        <div className="pw-card-section">
+          <div className="pw-card-container">
             {product_data.map((item, idx) => (
               <ProductCard
                 key={idx}

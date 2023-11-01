@@ -1,15 +1,15 @@
-.card-container,
-.card,
-.image,
-.title,
-.category,
-.desc,
-.price,
-.info {
+.pw-card-container,
+.pc-card,
+.pc-image,
+.pc-title,
+.pc-category,
+.pc-desc,
+.pc-price,
+.pc-info {
   background-color: transparent;
 }
 
-.card {
+.pc-card {
   background-color: rgba(35, 35, 35, 0.6);
   width: 15rem;
   padding: 3rem;
@@ -22,28 +22,28 @@
   gap: 1rem;
 }
 
-.card .image img {
+.pc-card .pc-image img {
   background: transparent;
 }
 
-.card .title {
+.pc-card .pc-title {
   width: 100%;
   font-size: 1.5rem;
   font-weight: 600;
 }
 
-.card .category {
+.pc-card .pc-category {
   width: 100%;
   font-size: small;
   text-align: left;
 }
 
-.card .desc {
+.pc-card .pc-desc {
   --max-lines: 2;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.card .price {
+.pc-card .pc-price {
   width: 100%;
 }

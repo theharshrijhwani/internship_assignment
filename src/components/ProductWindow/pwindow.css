@@ -1,38 +1,52 @@
-.container {
+.pw-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
 
-.card-holder {
+.pw-card-holder {
   width: 95vw;
   height: 95vh;
   background-color: #333444;
   border-radius: 2rem;
 }
 
-.heading {
+.pw-heading {
   background-color: transparent;
   margin-top: 1rem;
 }
 
-.card-holder h1 {
+.pw-card-holder h1 {
   background-color: transparent;
   text-align: center;
   padding: 1.3rem;
   font-weight: 700;
 }
 
-.card-section {
+.pw-card-section {
   background-color: transparent;
   margin-top: 4.5rem;
   padding: 3rem;
 }
 
-.card-container {
+.pw-card-container {
   display: flex;
   flex-wrap: nowrap;
   gap: 3rem;
   overflow: scroll;
+}
+
+.dropdown-toggle,
+.dropdown,
+.pw-options {
+  background-color: transparent;
+}
+
+.pw-options {
+  display: flex;
+  justify-content: end;
+  gap: 1.5rem;
+  margin-right: 1rem;
+  align-items: center;
 }
