@@ -1,7 +1,13 @@
 import React from "react";
 
+import ProductWindow from "./components/ProductWindow/ProductWindow";
+
 const App = () => {
-  return <div>Harsh</div>;
+  return (
+    <>
+      <ProductWindow />
+    </>
+  );
 };
 
 export default App;
