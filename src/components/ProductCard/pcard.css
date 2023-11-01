@@ -9,13 +9,6 @@
   background-color: transparent;
 }
 
-.card-container {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 3rem;
-  overflow: scroll;
-}
-
 .card {
   background-color: rgba(35, 35, 35, 0.6);
   width: 15rem;
