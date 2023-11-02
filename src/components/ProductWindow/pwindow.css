@@ -60,6 +60,7 @@
 }
 
 .search {
+  visibility: hidden;
   margin-left: 3rem;
   width: 50vw;
   border-radius: 1rem;
@@ -71,4 +72,34 @@
   width: 100%;
   background-color: transparent;
   padding: 1rem;
+}
+
+.swiper,
+.swiper-pagination,
+.swiper-pagination-clickable,
+.swiper-pagination-bullets,
+.swiper-pagination-horizontal,
+.swiper-wrapper,
+.swiper-initialized,
+.swiper-horizontal,
+.swiper-backface-hidden,
+.mySwiper {
+  background-color: transparent !important;
+}
+
+@media (max-width: 768px) {
+  /* .pw-card-container {
+    flex-direction: column;
+    overflow: unset;
+  } */
+  /* .pw-card-holder {
+    height: 100vh;
+  } */
+  .pw-options {
+    justify-content: center;
+    flex-direction: column;
+  }
+  .filter-container {
+    flex-direction: column;
+  }
 }

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
 
 import "./pwindow.css";
+import "swiper/css";
+import "swiper/css/pagination";
 
 import ProductCard from "../ProductCard/ProductCard";
 
@@ -14,21 +18,32 @@ const ProductWindow = () => {
   const [category, setCategory] = useState(null);
   const [filter, setFilter] = useState(null);
   const [productData, setProductData] = useState(product_data);
-  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const searchBar = document.getElementById("search-bar");
-    searchBar.addEventListener("input", (e) => {
-      setSearch(e.target.value.toLowerCase());
-    });
-    console.log(search);
-  }, []);
+    console.log(productData.length);
+    console.log(product_data.length);
+  });
 
-  useEffect(() => {
-    const sortedData = [productData].sort((a, b) => a.price - b.price);
-    setProductData(sortedData[0]);
-    console.log(sortedData);
-  }, [filter, productData]);
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + "</span>";
+    },
+  };
+
+  // useEffect(() => {
+  //   const searchBar = document.getElementById("search-bar");
+  //   searchBar.addEventListener("input", (e) => {
+  //     setSearch(e.target.value.toLowerCase());
+  //   });
+  //   console.log(search);
+  // }, []);
+
+  // useEffect(() => {
+  //   const sortedData = [productData].sort((a, b) => a.price - b.price);
+  //   setProductData(sortedData[0]);
+  //   console.log(sortedData);
+  // }, [filter, productData]);
 
   return (
     <div className="pw-container">
@@ -65,64 +80,9 @@ const ProductWindow = () => {
         </div>
         <div className="pw-card-section">
           <div className="pw-card-container">
-            {search === ""
-              ? filter === null
-                ? category === null
-                  ? product_data.map((item, idx) => (
-                      <ProductCard
-                        key={idx}
-                        title={item.name}
-                        price={item.price}
-                        image={item.image}
-                        desc={item.desc}
-                        category={item.category}
-                      />
-                    ))
-                  : product_data
-                      .filter((item) => item.category === category)
-                      .map((item, idx) => (
-                        <ProductCard
-                          key={idx}
-                          title={item.name}
-                          price={item.price}
-                          image={item.image}
-                          desc={item.desc}
-                          category={item.category}
-                        />
-                      ))
-                : category === null
-                ? product_data
-                    .sort((a, b) =>
-                      filter === "asc" ? a.price - b.price : b.price - a.price
-                    )
-                    .map((item, idx) => (
-                      <ProductCard
-                        key={idx}
-                        title={item.name}
-                        price={item.price}
-                        image={item.image}
-                        desc={item.desc}
-                        category={item.category}
-                      />
-                    ))
-                : product_data
-                    .sort((a, b) =>
-                      filter === "asc" ? a.price - b.price : b.price - a.price
-                    )
-                    .filter((item) => item.category === category)
-                    .map((item, idx) => (
-                      <ProductCard
-                        key={idx}
-                        title={item.name}
-                        price={item.price}
-                        image={item.image}
-                        desc={item.desc}
-                        category={item.category}
-                      />
-                    ))
-              : filter === null
+            {filter === null
               ? category === null
-                ? product_data.map((item, idx) => (
+                ? productData.map((item, idx) => (
                     <ProductCard
                       key={idx}
                       title={item.name}
@@ -132,8 +92,7 @@ const ProductWindow = () => {
                       category={item.category}
                     />
                   ))
-                : product_data
-
+                : productData
                     .filter((item) => item.category === category)
                     .map((item, idx) => (
                       <ProductCard
@@ -146,8 +105,7 @@ const ProductWindow = () => {
                       />
                     ))
               : category === null
-              ? product_data
-
+              ? productData
                   .sort((a, b) =>
                     filter === "asc" ? a.price - b.price : b.price - a.price
                   )
@@ -161,8 +119,7 @@ const ProductWindow = () => {
                       category={item.category}
                     />
                   ))
-              : product_data
-
+              : productData
                   .sort((a, b) =>
                     filter === "asc" ? a.price - b.price : b.price - a.price
                   )
@@ -177,60 +134,6 @@ const ProductWindow = () => {
                       category={item.category}
                     />
                   ))}
-            {/* {filter === null
-              ? category === null
-                ? product_data.map((item, idx) => (
-                    <ProductCard
-                      key={idx}
-                      title={item.name}
-                      price={item.price}
-                      image={item.image}
-                      desc={item.desc}
-                      category={item.category}
-                    />
-                  ))
-                : product_data
-                    .filter((item) => item.category === category)
-                    .map((item, idx) => (
-                      <ProductCard
-                        key={idx}
-                        title={item.name}
-                        price={item.price}
-                        image={item.image}
-                        desc={item.desc}
-                        category={item.category}
-                      />
-                    ))
-              : category === null
-              ? product_data
-                  .sort((a, b) =>
-                    filter === "asc" ? a.price - b.price : b.price - a.price
-                  )
-                  .map((item, idx) => (
-                    <ProductCard
-                      key={idx}
-                      title={item.name}
-                      price={item.price}
-                      image={item.image}
-                      desc={item.desc}
-                      category={item.category}
-                    />
-                  ))
-              : product_data
-                  .sort((a, b) =>
-                    filter === "asc" ? a.price - b.price : b.price - a.price
-                  )
-                  .filter((item) => item.category === category)
-                  .map((item, idx) => (
-                    <ProductCard
-                      key={idx}
-                      title={item.name}
-                      price={item.price}
-                      image={item.image}
-                      desc={item.desc}
-                      category={item.category}
-                    />
-                  ))} */}
           </div>
         </div>
       </div>
