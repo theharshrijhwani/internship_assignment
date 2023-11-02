@@ -14,10 +14,15 @@ const ProductWindow = () => {
   const [category, setCategory] = useState(null);
   const [filter, setFilter] = useState(null);
   const [productData, setProductData] = useState(product_data);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    console.log(category);
-  }, [category]);
+    const searchBar = document.getElementById("search-bar");
+    searchBar.addEventListener("input", (e) => {
+      setSearch(e.target.value.toLowerCase());
+    });
+    console.log(search);
+  }, []);
 
   useEffect(() => {
     const sortedData = [productData].sort((a, b) => a.price - b.price);
@@ -32,30 +37,147 @@ const ProductWindow = () => {
           <h1>Products Available</h1>
         </div>
         <div className="pw-options">
-          <img
-            src={remove}
-            width={20}
-            height={20}
-            style={{
-              backgroundColor: "transparent",
-              filter: "invert(1)",
-              cursor: "pointer",
-            }}
-            onClick={() => {
-              setFilter(null);
-              setCategory(null);
-            }}
-          />
-          <Dropdown
-            placeholder="Category"
-            values={categories}
-            func={setCategory}
-          />
-          <Dropdown placeholder="Filters" values={filters} func={setFilter} />
+          <div className="search">
+            <input id="search-bar" type="text" placeholder="Search" />
+          </div>
+          <div className="filter-container">
+            <img
+              src={remove}
+              width={20}
+              height={20}
+              style={{
+                backgroundColor: "transparent",
+                filter: "invert(1)",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                setFilter(null);
+                setCategory(null);
+              }}
+            />
+            <Dropdown
+              placeholder="Category"
+              values={categories}
+              func={setCategory}
+            />
+            <Dropdown placeholder="Filters" values={filters} func={setFilter} />
+          </div>
         </div>
         <div className="pw-card-section">
           <div className="pw-card-container">
-            {filter === null
+            {search === ""
+              ? filter === null
+                ? category === null
+                  ? product_data.map((item, idx) => (
+                      <ProductCard
+                        key={idx}
+                        title={item.name}
+                        price={item.price}
+                        image={item.image}
+                        desc={item.desc}
+                        category={item.category}
+                      />
+                    ))
+                  : product_data
+                      .filter((item) => item.category === category)
+                      .map((item, idx) => (
+                        <ProductCard
+                          key={idx}
+                          title={item.name}
+                          price={item.price}
+                          image={item.image}
+                          desc={item.desc}
+                          category={item.category}
+                        />
+                      ))
+                : category === null
+                ? product_data
+                    .sort((a, b) =>
+                      filter === "asc" ? a.price - b.price : b.price - a.price
+                    )
+                    .map((item, idx) => (
+                      <ProductCard
+                        key={idx}
+                        title={item.name}
+                        price={item.price}
+                        image={item.image}
+                        desc={item.desc}
+                        category={item.category}
+                      />
+                    ))
+                : product_data
+                    .sort((a, b) =>
+                      filter === "asc" ? a.price - b.price : b.price - a.price
+                    )
+                    .filter((item) => item.category === category)
+                    .map((item, idx) => (
+                      <ProductCard
+                        key={idx}
+                        title={item.name}
+                        price={item.price}
+                        image={item.image}
+                        desc={item.desc}
+                        category={item.category}
+                      />
+                    ))
+              : filter === null
+              ? category === null
+                ? product_data.map((item, idx) => (
+                    <ProductCard
+                      key={idx}
+                      title={item.name}
+                      price={item.price}
+                      image={item.image}
+                      desc={item.desc}
+                      category={item.category}
+                    />
+                  ))
+                : product_data
+
+                    .filter((item) => item.category === category)
+                    .map((item, idx) => (
+                      <ProductCard
+                        key={idx}
+                        title={item.name}
+                        price={item.price}
+                        image={item.image}
+                        desc={item.desc}
+                        category={item.category}
+                      />
+                    ))
+              : category === null
+              ? product_data
+
+                  .sort((a, b) =>
+                    filter === "asc" ? a.price - b.price : b.price - a.price
+                  )
+                  .map((item, idx) => (
+                    <ProductCard
+                      key={idx}
+                      title={item.name}
+                      price={item.price}
+                      image={item.image}
+                      desc={item.desc}
+                      category={item.category}
+                    />
+                  ))
+              : product_data
+
+                  .sort((a, b) =>
+                    filter === "asc" ? a.price - b.price : b.price - a.price
+                  )
+                  .filter((item) => item.category === category)
+                  .map((item, idx) => (
+                    <ProductCard
+                      key={idx}
+                      title={item.name}
+                      price={item.price}
+                      image={item.image}
+                      desc={item.desc}
+                      category={item.category}
+                    />
+                  ))}
+            {/* {filter === null
               ? category === null
                 ? product_data.map((item, idx) => (
                     <ProductCard
@@ -98,30 +220,6 @@ const ProductWindow = () => {
                   .sort((a, b) =>
                     filter === "asc" ? a.price - b.price : b.price - a.price
                   )
-                  .filter((item) => item.category === category)
-                  .map((item, idx) => (
-                    <ProductCard
-                      key={idx}
-                      title={item.name}
-                      price={item.price}
-                      image={item.image}
-                      desc={item.desc}
-                      category={item.category}
-                    />
-                  ))}
-
-            {/* {category === null
-              ? product_data.map((item, idx) => (
-                  <ProductCard
-                    key={idx}
-                    title={item.name}
-                    price={item.price}
-                    image={item.image}
-                    desc={item.desc}
-                    category={item.category}
-                  />
-                ))
-              : product_data
                   .filter((item) => item.category === category)
                   .map((item, idx) => (
                     <ProductCard

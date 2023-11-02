@@ -26,7 +26,7 @@
 
 .pw-card-section {
   background-color: transparent;
-  margin-top: 4.5rem;
+  margin-top: 1rem;
   padding: 3rem;
 }
 
@@ -44,9 +44,31 @@
 }
 
 .pw-options {
+  margin-top: 2rem;
   display: flex;
-  justify-content: end;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-container {
   gap: 1.5rem;
   margin-right: 1rem;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.search {
+  margin-left: 3rem;
+  width: 50vw;
+  border-radius: 1rem;
+}
+
+.search input {
+  outline: none;
+  border: transparent;
+  width: 100%;
+  background-color: transparent;
+  padding: 1rem;
 }
